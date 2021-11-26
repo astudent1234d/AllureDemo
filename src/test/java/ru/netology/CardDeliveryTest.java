@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
 
-
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.exactText;
@@ -20,7 +19,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 
-
 public class CardDeliveryTest {
     @BeforeAll
     static void setUpAll() {
@@ -28,7 +26,9 @@ public class CardDeliveryTest {
     }
 
     @AfterAll
-    static void tearDownAll() {    SelenideLogger.removeListener("allure");}
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
 
     @BeforeEach
     void setUp() {
@@ -58,6 +58,4 @@ public class CardDeliveryTest {
                 .shouldBe(visible, Duration.ofSeconds(15))
                 .shouldHave(exactText("Встреча успешно запланирована на " + validUser.getSecondMeetingDate()));
     }
-
-
 }
