@@ -1,9 +1,15 @@
 package ru.netology;
 
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
+
+
 
 import java.time.Duration;
 
@@ -14,7 +20,16 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 
+
 public class CardDeliveryTest {
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {    SelenideLogger.removeListener("allure");}
+
     @BeforeEach
     void setUp() {
         open("http://localhost:9999");
@@ -43,4 +58,6 @@ public class CardDeliveryTest {
                 .shouldBe(visible, Duration.ofSeconds(15))
                 .shouldHave(exactText("Встреча успешно запланирована на " + validUser.getSecondMeetingDate()));
     }
+
+
 }
